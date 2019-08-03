@@ -3,6 +3,7 @@ from app import db, ma
 
 # Room Table
 class Room(db.Model):
+    __tablename__ = 'room'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     qty = db.Column(db.Integer)
