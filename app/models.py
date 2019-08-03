@@ -10,6 +10,12 @@ class Room(db.Model):
     price = db.Column(db.Float, nullable=False)
     available_rooms = db.Column(db.Integer)
 
+    def __init__(self, name, qty, price, available_rooms):
+        self.name = name
+        self.qty = qty
+        self.price = price
+        self.available_rooms = available_rooms
+
     def __repr__(self):
         return f"Room(Name:{self.name}, Qty:{self.qty}, Price:{self.price}, Available:{self.available_rooms})"
 
