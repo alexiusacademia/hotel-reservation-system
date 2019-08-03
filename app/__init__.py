@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_bcrypt import Bcrypt
 import os
 
 
@@ -17,3 +18,6 @@ db = SQLAlchemy(app)
 
 # Initialize ma
 ma = Marshmallow(app)
+
+# Initialize bcrypt
+bcrypt = Bcrypt(app)

@@ -2,3 +2,5 @@ from app import app
 from app.routes.home import home
 from app.routes.create_room import create_room
 from app.routes.rooms import rooms
+from app.routes.room import room
+from app.routes.add_user import add_user
