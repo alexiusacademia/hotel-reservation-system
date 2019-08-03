@@ -1,4 +1,4 @@
-from app import app, db, request, jsonify
+from app import app, db, request
 from app.models import Room, room_schema
 
 
