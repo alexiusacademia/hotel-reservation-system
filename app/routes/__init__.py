@@ -4,3 +4,4 @@ from app.routes.create_room import create_room
 from app.routes.rooms import rooms
 from app.routes.room import room
 from app.routes.add_user import add_user
+from app.routes.send_mail import send_mail
