@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-from flask_mail import Mail, Message
 import os
 from functools import wraps
 import jwt
@@ -25,9 +24,6 @@ ma = Marshmallow(app)
 
 # Initialize bcrypt
 bcrypt = Bcrypt(app)
-
-# Initialize Mail
-mail = Mail(app)
 
 
 def token_required(f):
