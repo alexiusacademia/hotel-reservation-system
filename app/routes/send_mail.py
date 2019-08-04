@@ -1,4 +1,4 @@
-from app import app, mail, Message
+from app import app, mail, Message, jsonify
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
@@ -6,7 +6,6 @@ from sendgrid.helpers.mail import *
 
 @app.route('/send_mail')
 def send_mail():
-    # api_key='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'
     api_key = os.environ.get('SENDGRID_API_KEY')
 
     from_email = From('syncsoftsolutions.software@gmail.com')
@@ -27,4 +26,4 @@ def send_mail():
     except Exception as e:
         print(e)
 
-    return 'Email sent!'
+    return jsonify({'message': 'Email has been sent!'})
