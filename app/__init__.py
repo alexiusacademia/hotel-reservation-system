@@ -4,6 +4,8 @@ from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 import os
+from functools import wraps
+import jwt
 
 
 # base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -26,3 +28,21 @@ bcrypt = Bcrypt(app)
 
 # Initialize Mail
 mail = Mail(app)
+
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        # token = request.args.get('token')
+        token = request.headers.get('X-Access-Token')
+
+        if not token:
+            return jsonify({'message': 'Token missing'})
+
+        try:
+            data = jwt.decode(token, str(app.config['SECRET_KEY']))
+        except Exception as e:
+            return jsonify({'message': 'Invalid token!', 'error': str(e)})
+
+        return f(*args, **kwargs)
+    return decorated
