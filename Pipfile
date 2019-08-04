@@ -13,6 +13,8 @@ marshmallow-sqlalchemy = "*"
 flask-bcrypt = "*"
 flask-login = "*"
 gunicorn = "*"
+flask-mail = "*"
+flask-jwt = "*"
 
 [requires]
 python_version = "3.7"
