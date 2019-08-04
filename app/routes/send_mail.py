@@ -1,4 +1,4 @@
-from app import app, mail, Message, jsonify
+from app import app, jsonify
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
