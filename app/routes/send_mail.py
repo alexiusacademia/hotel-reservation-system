@@ -6,8 +6,8 @@ from sendgrid.helpers.mail import *
 
 @app.route('/send_mail')
 def send_mail():
-    api_key='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'
-
+    # api_key='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'
+    api_key = os.environ.get('SENDGRID_API_KEY')
 
     from_email = From('syncsoftsolutions.software@gmail.com')
     subject = Subject('Test Subject using Sendgrid')
