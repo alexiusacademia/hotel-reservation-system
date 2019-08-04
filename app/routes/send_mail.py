@@ -6,18 +6,25 @@ from sendgrid.helpers.mail import *
 
 @app.route('/send_mail')
 def send_mail():
-    sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
-    from_email = Email('syncsoftsolutions.software@gmail.com')
-    subject = 'Test Subject using Sendgrid'
-    to_email = Email('alexius.academia@gmail.com')
+    api_key='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'
+
+
+    from_email = From('syncsoftsolutions.software@gmail.com')
+    subject = Subject('Test Subject using Sendgrid')
+    to_email = To('alexius.academia@gmail.com')
     content = Content('text/plain', 'Hello! This is a test mail using sendgrid.')
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    '''
-    msg = Message(subject='Test Subject',
-                  recipients=['alexius.academia@gmail.com'],
-                  body='This is a test message 2',
-                  sender='syncsoftsolutions.software@gmail.com')
-    mail.send(msg)
-    '''
+    mail = Mail(from_email,
+                to_email,
+                subject,
+                content)
+
+    try:
+        sg = sendgrid.SendGridAPIClient(api_key=api_key)
+        response = sg.send(mail)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e)
+
     return 'Email sent!'
