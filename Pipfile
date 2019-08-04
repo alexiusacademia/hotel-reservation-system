@@ -13,8 +13,6 @@ marshmallow-sqlalchemy = "*"
 flask-bcrypt = "*"
 flask-login = "*"
 gunicorn = "*"
-flask-mail = "*"
-flask-jwt = "*"
 sendgrid = "*"
 
 [requires]
