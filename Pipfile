@@ -13,6 +13,7 @@ marshmallow-sqlalchemy = "*"
 flask-bcrypt = "*"
 gunicorn = "*"
 sendgrid = "*"
+jwt = "*"
 
 [requires]
 python_version = "3.7"
