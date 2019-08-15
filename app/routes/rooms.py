@@ -3,7 +3,7 @@ from app.models import Room, rooms_schema
 
 
 @app.route('/rooms')
-@token_required
+# @token_required
 def rooms():
     rooms = Room.query.all()
 
