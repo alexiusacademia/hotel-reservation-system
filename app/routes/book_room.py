@@ -1,4 +1,5 @@
-from app import app, request, jsonify
+from app import app, request, jsonify, db
+from app.models import Room
 
 
 @app.route('/book')
@@ -8,6 +9,25 @@ def book():
 
     room_id = request.args['room_id']
 
-    print(room_id)
+    try:
+        room_id = int(room_id)
+    except Exception as e:
+        print(e)
 
-    return jsonify({'success': True})
+    room = Room.query.get(room_id)
+    available_rooms = room.available_rooms
+
+    if available_rooms == 0:
+        return jsonify({
+            'success': False,
+            'available_rooms': 0,
+            'message': 'There are no rooms available'
+        })
+
+    room.available_rooms = available_rooms - 1
+    db.session.commit()
+
+    return jsonify({
+        'success': True,
+        'available_rooms': room.available_rooms
+    })
