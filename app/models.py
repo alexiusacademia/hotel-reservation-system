@@ -5,26 +5,34 @@ from app import db, ma
 class Room(db.Model):
     __tablename__ = 'room'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    qty = db.Column(db.Integer)
     price = db.Column(db.Float, nullable=False)
-    available_rooms = db.Column(db.Integer)
+    available = db.Column(db.Boolean, nullable=False, default=True)
     room_number = db.Column(db.String(15), nullable=False)
+    type_id = db.Column(db.Integer, db.ForeignKey('room_type.id'), nullable=False, default=1)
+    type = db.relationship('RoomType', backref='room_type', lazy=True)
 
-    def __init__(self, name, qty, price, available_rooms):
-        self.name = name
-        self.qty = qty
-        self.price = price
-        self.available_rooms = available_rooms
+    def __init__(self, *args, **kwargs):
+        self.room_number = kwargs['room_number']
+        self.price = kwargs['price']
+        self.type_id = kwargs['type']
 
     def __repr__(self):
-        return f"Room(Name:{self.name}, Qty:{self.qty}, Price:{self.price}, Available:{self.available_rooms})"
+        return f"Room(Name:{self.room_number}, Price:{self.price}, Available:{self.available})"
 
 
 # Room Schema
 class RoomSchema(ma.Schema):
     class Meta:
         fields = ('id', 'name', 'qty', 'price', 'available_rooms')
+
+
+class RoomType(db.Model):
+    __tablename__ = 'room_type'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+
+    def __init__(self, name):
+        self.name = name
 
 
 class UserType(db.Model):
