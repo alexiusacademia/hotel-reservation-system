@@ -22,7 +22,7 @@ class Room(db.Model):
 # Room Schema
 class RoomSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'qty', 'price', 'available_rooms')
+        fields = ('id', 'room_number', 'available')
 
 
 class RoomType(db.Model):
