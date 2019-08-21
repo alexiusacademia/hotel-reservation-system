@@ -5,7 +5,6 @@ from app import db, ma
 class Room(db.Model):
     __tablename__ = 'room'
     id = db.Column(db.Integer, primary_key=True)
-    price = db.Column(db.Float, nullable=False)
     available = db.Column(db.Boolean, nullable=False, default=True)
     room_number = db.Column(db.String(15), nullable=False)
     type_id = db.Column(db.Integer, db.ForeignKey('room_type.id'), nullable=False, default=1)
@@ -17,7 +16,7 @@ class Room(db.Model):
         self.type_id = kwargs['type']
 
     def __repr__(self):
-        return f"Room(Name:{self.room_number}, Price:{self.price}, Available:{self.available})"
+        return f"Room(Name:{self.room_number}, Price:{self.type.price}, Available:{self.available})"
 
 
 # Room Schema
@@ -30,9 +29,11 @@ class RoomType(db.Model):
     __tablename__ = 'room_type'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-
-    def __init__(self, name):
+    price = db.Column(db.Float, nullable=False)
+    
+    def __init__(self, name, price):
         self.name = name
+        self.price = price
 
 
 class UserType(db.Model):
