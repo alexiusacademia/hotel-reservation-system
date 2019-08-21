@@ -1,5 +1,5 @@
 from app import app, jsonify, token_required
-from app.models import Room, rooms_schema
+from app.models import Room, RoomType, rooms_schema
 
 
 @app.route('/rooms')
@@ -7,6 +7,16 @@ from app.models import Room, rooms_schema
 def rooms():
     rooms = Room.query.all()
 
-    result = rooms_schema.dump(rooms)
+    _rooms_list = []
 
-    return jsonify(result.data)
+    for room in rooms:
+        _room = {}
+        _room['id'] = room.id
+        _room['available'] = room.available
+        _room['room_number'] = room.room_number
+        _room['price'] = room.type.price
+        _room['type'] = room.type.name
+
+        _rooms_list.append(_room)
+        
+    return jsonify(_rooms_list)
