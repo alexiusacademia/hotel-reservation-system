@@ -9,6 +9,7 @@ class Room(db.Model):
     qty = db.Column(db.Integer)
     price = db.Column(db.Float, nullable=False)
     available_rooms = db.Column(db.Integer)
+    room_number = db.Column(db.String(15), nullable=False)
 
     def __init__(self, name, qty, price, available_rooms):
         self.name = name
