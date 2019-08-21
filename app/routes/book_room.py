@@ -15,19 +15,19 @@ def book():
         print(e)
 
     room = Room.query.get(room_id)
-    available_rooms = room.available_rooms
+    isavailable = room.available
 
-    if available_rooms == 0:
+    if not isavailable:
         return jsonify({
             'success': False,
-            'available_rooms': 0,
-            'message': 'There are no rooms available'
+            'available': False,
+            'message': 'Room is not available'
         })
 
-    room.available_rooms = available_rooms - 1
+    room.available = False
     db.session.commit()
 
     return jsonify({
         'success': True,
-        'available_rooms': room.available_rooms
+        'message': 'Room has been booked.'
     })
