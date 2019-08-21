@@ -8,3 +8,4 @@ from app.routes.send_mail import send_mail
 from app.routes.login import login
 from app.routes.register import register
 from app.routes.book_room import book
+from app.routes.checkout import checkout
