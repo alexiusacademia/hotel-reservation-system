@@ -28,4 +28,10 @@ def checkout():
             'message': 'You are trying to checkout a room that hasn\'t been booked yet.'
         })
 
-    return jsonify({})
+    room.available = True
+    db.session.commit()
+
+    return jsonify({
+        'success': True,
+        'message': f'The room with id {room_id} has been checkout out and is now available for booking.'
+    })
