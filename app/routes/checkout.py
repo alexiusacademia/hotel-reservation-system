@@ -20,4 +20,12 @@ def checkout():
             'message': f'Room with id {room_id} does not exist.'
         })
 
+    available = room.available
+
+    if available:
+        return jsonify({
+            'success': False,
+            'message': 'You are trying to checkout a room that hasn\'t been booked yet.'
+        })
+
     return jsonify({})
