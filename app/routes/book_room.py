@@ -15,6 +15,13 @@ def book():
         print(e)
 
     room = Room.query.get(room_id)
+
+    if not room:
+        return jsonify({
+            'success': False,
+            'message': f'The room with id {room_id} does not exist.'
+        })
+
     isavailable = room.available
 
     if not isavailable:
