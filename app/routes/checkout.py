@@ -1,4 +1,5 @@
 from app import app, db, jsonify, request
+from app.models import Room
 
 
 @app.route('/checkout')
@@ -10,5 +11,13 @@ def checkout():
         })
 
     room_id = request.args['room_id']
+
+    room = Room.query.get(room_id)
+
+    if not room:
+        return jsonify({
+            'success': False,
+            'message': f'Room with id {room_id} does not exist.'
+        })
 
     return jsonify({})
